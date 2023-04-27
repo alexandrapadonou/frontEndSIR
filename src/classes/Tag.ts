@@ -4,11 +4,10 @@ export class Tag {
 
     id: number;
     label: string;
-    tickets: Array<Ticket>;
+    tickets: Array<Ticket> = [];
 
-    constructor(id: number, label: string, tickets: Ticket[]){
+    constructor(id: number, label: string){
         this.id= id;
         this.label = label;
-        this.tickets = tickets;
     }
 }
