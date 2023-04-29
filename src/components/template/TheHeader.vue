@@ -7,14 +7,14 @@ import { RouterLink } from "vue-router";
 <template>
 
     <header 
-        class="flex justify-between z-50 w-screen"
+        class="flex justify-between z-50 w-screen space-x-6"
         >
 
-        <RouterLink to="/" class="text sm md:text-lg font-medium hover:border-b-2 text-gray-800 hover:border-gray-800 poppins"
+        <RouterLink to="/" class="text-xs md:text-lg font-medium hover:border-b-2 text-gray-800 hover:border-gray-800 poppins"
             >  <i class="fa-brands fa-resolving">Issues</i>
         </RouterLink>
 
-        <div class="flex items-center space-x-6 text-sm">
+        <div class="flex items-center space-x-2 md:space-x-6 text-xs md:text-sm">
             <RouterLink to="/" class="hover:border-b-2 text-gray-800 hover:border-gray-800 poppins"
             ><i class="fa-light fa-house-blank fa-bounce"></i> Accueil</RouterLink>
 
