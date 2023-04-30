@@ -13,11 +13,11 @@
             <div class="flex flex-row justify-between">
                 <RouterLink :to="'/tickets/'+ticket?.id" class="overflow-hidden hover:text-clip hover:underline text-sm md:text-lg ">{{ticket?.title}}</RouterLink>
                 <div class="flex flex-row space-x-2 py-2">
-                    <span class="space-x-2"><i class="fa-light fa-comments"></i><span>{{ ticket?.discussions.length }}</span></span>
+                    <span class="space-x-2"><i class="fa-light fa-comments"></i><span>{{ ticket?.nbDiscussion }} discussions</span></span>
 
                 </div>
             </div>
-            <div class="flex flex-row justify-between">
+            <div class="flex flex-row justify-between" v-if="ticket?.resolvers.length !=0">
                 <div class="grid grid-cols-4 gap-y-2 gap-x-5 justify-self-start"><span v-for="tag in ticket?.tags.slice(0,4)" :key="tag.id" class="bg-blue-800 text-white text-center rounded-full px-2 py-1">{{ tag.label }}</span></div>
                 <div class="grid grid-cols-4 gap-y-2 gap-x-5 justify-self-end ">                    
                     <span>Assigné à : </span>

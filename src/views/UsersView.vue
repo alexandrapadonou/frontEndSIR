@@ -2,19 +2,19 @@
     import UserVue from '../components/User.vue'
     import PaginationVue from "../components/Pagination.vue";
     import { ref, computed } from 'vue'
-    import { User } from '@/classes/User';
     import NewUserTagModal from '../components/NewUserTagModal.vue'
+
+    import { UserStore } from "@/stores/user"
+    import { User } from '@/classes/User';
+    import { plainToClass } from "class-transformer";
+
+    const userStore = UserStore();
+
+    userStore.getAll()
+    const users = computed(()=>userStore.getusers );
 
     // order 1 = asc; 0 = desc
     var filterBy = ref({"name":"", "order":1})
-    
-    var users =[
-        new User(1,"Kelly"), new User(1,"Baké"), new User(1,"Toni"), new User(1,"Momo"),new User(1,"Baba"),
-        new User(1,"Kelly"), new User(1,"Baké"), new User(1,"Toni"), new User(1,"Momo"),new User(1,"Baba"),
-        new User(1,"Kelly"), new User(1,"Baké"), new User(1,"Toni"), new User(1,"Momo"),new User(1,"Baba"),
-        new User(1,"Kelly"), new User(1,"Baké"), new User(1,"Toni"), new User(1,"Momo"),new User(1,"Baba"),
-        new User(1,"Kelly"), new User(1,"Baké"), new User(1,"Toni"), new User(1,"Momo"),new User(1,"Baba"),
-    ]
 
     var is_order_down = ref(true)
     function change_order(){
@@ -42,9 +42,11 @@
             <NewUserTagModal  :type="'user'" />
         </div>
 
+        
+
         <div class="flex flex-col px-2 pb-8 ">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 gap-x-5 md:gap-x-10">
-                <UserVue v-for="user in users" :key="user.id" :user="user"/>
+                <UserVue v-for="user in users" :key="user.id" :user="plainToClass(User, user)"/>
             </div>
         </div>
 

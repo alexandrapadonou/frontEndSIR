@@ -1,28 +1,22 @@
 <script setup lang="ts">
   import { Ticket } from '@/classes/Ticket';
-  import { User } from '@/classes/User';
   import PaginationVue from "../components/Pagination.vue";
   import TicketVue from '../components/Ticket.vue';
   import { ref, computed } from 'vue'
-  import { Tag } from '@/classes/Tag';
+  import { TicketStore } from "@/stores/ticket"
+  import { plainToClass } from "class-transformer";
+
+  const ticketStore = TicketStore();
+
+  ticketStore.getAll()
+  const tickets = computed(()=>ticketStore.getTickets );
+
 
   var filterByTitle = ref({"value":"", "order":1})
   var filterByAuthor = ref({"value":"", "order":1})
   var filterByTag = ref({"value":"", "order":1})
   var filterByAssignedTo = ref({"value":"", "order":1})
   var sortBy = ref({"value":"", "order":1})
-
-  var tickets =[
-    
-      new Ticket(1, "efdfrg","dzsdddddddddddd dssssfd", "25-04-2023 12:52",'', new User(12,"Baba"),[new User(1,"Toni"),new User(2,"Kelly")],[],[new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données"),new Tag(4, "Données")]),
-      new Ticket(1, "efdfrg","dzsdddddddddddd dssssfd", "25-04-2023 12:52",'', new User(12,"Baba"),[new User(1,"Toni"),new User(2,"Kelly")],[],[new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données"),]),
-      new Ticket(1, "efdfrg","dzsdddddddddddd dssssfd", "25-04-2023 12:52",'26-04-2023', new User(12,"Baba"),[new User(1,"Toni"),new User(2,"Kelly")],[],[new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données"),]),
-      new Ticket(1, "efdfrg","dzsdddddddddddd dssssfd", "25-04-2023 12:52",'', new User(12,"Baba"),[new User(1,"Toni")],[],[new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données"),]),
-      new Ticket(1, "efdfrg","dzsdddddddddddd dssssfd", "25-04-2023 12:52",'', new User(12,"Baba"),[],[],[new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données"),]),
-
-
-  ]
-
 
     var is_order_down = ref(true)
     function change_order(){
@@ -90,7 +84,7 @@
 
     <div class="flex flex-col px-2 pb-8 pt-5">
         <div class="grid grid-cols-1 gap-y-5 gap-x-5 md:gap-x-10 w-full">
-            <TicketVue v-for="ticket in tickets" :key="ticket.id" :ticket="ticket" class="w-full"/>
+            <TicketVue v-for="ticket in tickets" :key="ticket.id" :ticket="plainToClass(Ticket, ticket)" class="w-full"/>
         </div>
     </div>
 

@@ -11,8 +11,10 @@ export class Ticket {
     author:User;
 
     resolvers:Array<User>=[];
-    discussions:Array<Discussion>=[];
+    discussions?:Array<Discussion>=[];
     tags:Array<Tag>=[];
+    nbDiscussion?:number=0;
+
 
     constructor(id: number, title: string, content: string, createdAt: string, closedAt: string, author: User, resolvers: User[], discussions: Discussion[], tags: Tag[]){
         this.id= id;

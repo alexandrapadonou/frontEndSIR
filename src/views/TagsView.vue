@@ -5,16 +5,18 @@
     import { Tag } from '@/classes/Tag';
     import NewUserTagModal from '../components/NewUserTagModal.vue'
     
+    import { TagStore } from "@/stores/tag"
+    import { plainToClass } from "class-transformer";
+
+    const tagStore = TagStore();
+
+    tagStore.getAll()
+    const tags = computed(()=>tagStore.getTags );
+
+
     // order 1 = asc; 0 = desc
     var filterBy = ref({"name":"", "order":1})
     
-    var tags =[
-        new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données"),
-        new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données"),
-        new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données"),
-        new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données"),
-        new Tag(1, "Mécanique"), new Tag(2, "Informatique"), new Tag(3, "Réseaux"),new Tag(4, "Données")
-    ]
 
     var is_order_down = ref(true)
     function change_order(){
@@ -43,7 +45,7 @@
 
         <div class="flex flex-col px-2 pb-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 gap-x-5 md:gap-x-10">
-                <TagVue v-for="tag in tags" :key="tag.id" :tag="tag"/>
+                <TagVue v-for="tag in tags" :key="tag.id" :tag="plainToClass(Tag, tag)"/>
             </div>
         </div>
 

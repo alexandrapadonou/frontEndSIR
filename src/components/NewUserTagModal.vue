@@ -1,67 +1,66 @@
 <script setup lang="ts">
-import { ref, defineProps, computed } from "vue";
+  import { ref, defineProps, computed } from "vue";
+  import { UserStore } from "@/stores/user"
+  import { TagStore } from "@/stores/tag"
 
-const show = ref(false);
-const props = defineProps({type:String});
-const value = ref("");
-const label = props.type=="tag"?"Label":"Nom";
-const errors = ""
-/*const errors = computed(() => { 
-  return props.type == "poule" ? pouleStore.errors:tableauStore.errors; 
- }) 
+  const userStore = UserStore();
+  const tagStore = TagStore();
 
-*/
+  const show = ref(false);
+  const props = defineProps({type:String});
+  const value = ref("");
+  const label = props.type=="tag"?"Label":"Nom";
+
+  const errors = computed(() => { 
+    return props.type == "user" ? userStore.errors:tagStore.errors; 
+  }) 
 
 
-function validateFields() {
-  if(value.value  == null || value.value == ""){
-    return false;
+
+  function validateFields() {
+    if(value.value  == null || value.value == ""){
+      return false;
+    }
   }
-}
 
 
 async function store() {
-  /*if(props.type == "tag"){
-      pouleStore.errors =""
+  if(props.type == "user"){
+      userStore.errors =""
       if(validateFields() === false){
-
-        pouleStore.errors = "Tous les champs sont requis !";
+        userStore.errors = "Le champ est requis !";
       }
-
       else{
-          await pouleStore.renseigner_score(id, {
-          "scoreA":score_equipe_1.value,
-          "scoreB":score_equipe_2.value,
-          "id":id
+          await userStore.store({
+          "name":value.value
         })
       }
 
-      if(pouleStore.errors == ""){
+      if(userStore.errors == ""){
+          value.value="";
           toggleModal();
       }
   }
   else{
-    tableauStore.errors =""
+    tagStore.errors =""
       if(validateFields() === false){
 
-        tableauStore.errors = "Tous les champs sont requis !";
+        tagStore.errors = "Le champ est requis !";
       }
 
       else{
-        await tableauStore.renseigner_score(id, {
-            "scoreA":score_equipe_1.value,
-            "scoreB":score_equipe_2.value,
-            "id":id
+        await tagStore.store({
+            "label":value.value
           },
-          parseInt(props.rang)
         )
       }
 
-      if(tableauStore.errors == ""){
+      if(tagStore.errors == ""){
+          value.value="";
           toggleModal();
       }
   }
-  */
+  
     
 }
 
