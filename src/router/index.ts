@@ -30,6 +30,15 @@ const router = createRouter({
     },
 
     {
+      path: '/nouveau-tickets',
+      name: 'nouveau-tickets',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/CreateTicketView.vue')
+    }, 
+
+    {
       path: '/tags',
       name: 'tags',
       // route level code-splitting

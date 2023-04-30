@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from 'axios'
 import {Constants} from "./constants";
+import router from "@/router"
 
 export const TicketStore = defineStore("ticket", {
   state: () => ({
@@ -32,7 +33,7 @@ export const TicketStore = defineStore("ticket", {
       ).then(() => {
 
           this.success="Ticket ajouté!"
-          this.getAll()
+          router.push("/tickets");
 
       })
       .catch(function (error) {

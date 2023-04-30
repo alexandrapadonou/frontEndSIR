@@ -33,7 +33,12 @@
           <span class="text-sm"><i class="fa-duotone fa-octagon"></i> 4 open </span>
           <span class="text-sm"><i class="fa-duotone fa-octagon-check"></i> 1 closed</span>
         </div>
-       
+        <RouterLink to="/nouveau-tickets" class="flex justify-end text-xl text-blue-900 cursor-pointer font-bold space-x-1">
+          <i  class="fa-thin fa-plus fa-beat text-sm"></i>
+
+          <i class="fa-light fa-list-check fa-beat" title="Ajouter un nouveau ticket"></i>
+
+        </RouterLink>
     </div>
 
     <div class="flex flex-row justify-between items-baseline pt-10" >
