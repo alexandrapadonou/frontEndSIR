@@ -17,7 +17,7 @@ export const UserStore = defineStore("user", {
     
     async getAll(){
       const constants = Constants();
-      await axios.get(constants.APIURI + "users")
+      await axios.get(constants.APIURI + "users",{ crossdomain: true })
                  .then((data) => {
                   this.users =  data.data
                  })
