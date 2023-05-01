@@ -1,46 +1,73 @@
-# tpjpa2023front
 
-This template should help get you started developing with Vue 3 in Vite.
+# FrontEnd Gestionnaire de ticket
 
-## Recommended IDE Setup
+[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+<!-- Table des matières -->
+## Table des matières
 
-## Type Support for `.vue` Imports in TS
+- [Table des matières](#table-des-matières)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- [À propos du projet](#à-propos-du-projet)
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+- [Technologies utilisées](#technologies-utilisées)
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- [Pour commencer](#pour-commencer)
 
-## Customize configuration
+  - [Prérequis](#pré-requis)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+  - [Démarrage](#démarrage)
 
-## Project Setup
+  - [Principes de fonctionnement](#principes-de-fonctionnement)
+  
+- [Auteurs](#auteurs)
+
+- [License](#license)
+
+## À propos du projet
+
+L'objectif du projet est de mettre en applicatioon nos différentes connaissances acquises au travers du cours de SIR.  
+Il s'agit de la mise en place d'une version reduite d'un gestionnaire de tickets. 
+
+## Technologies utilisées
+
+* [Tailwind CSS](https://tailwindcss.com/) - Framework CSS (front-end)
+* [Vue JS](https://vuejs.org/) - Framework JavaScript utilisé pour le frontend
+* [Jpa + JAX-RS] - Technoligie utilisé pour le backend
+
+
+## Pour commencer
+
+### Pré-requis
+
+Il est requis d'installer:
+
+- Node.js version 16.0 ou plus
+- JDK 1.8 ou plus
+- Gradle 4+ or Maven 3.2+
+
+### Démarrage
+
+Une fois tous les prérequis respectés, et le projet cloné:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Dans une autre console il faudrait lancer l'application le backend se trouvanc [ici](https://github.com/innomerve/tpjpa2023).
 
-```sh
-npm run build
-```
+### Principes de fonctionnement
 
-### Lint with [ESLint](https://eslint.org/)
+Afin de pré-remplir la base de données, nous avons crée un endpoint */api/fill/database*. Au lancemenet du projet il est donc conseiller de faire un get sur cet endpoint avant de pourvoir parcourir le projet.
 
-```sh
-npm run lint
-```
+
+## Auteurs
+* **Lokonon Bignon M Souvenir** 
+* **Padonou Alexandra Epiphanie** 
+
+
+
