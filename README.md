@@ -44,8 +44,9 @@ Il est requis d'installer:
 
 - Node.js version 16.0 ou plus
 - JDK 1.8 ou plus
-- Gradle 4+ or Maven 3.2+
-
+- Maven 3.2+
+- Un serveur MySQL
+- 
 ### Démarrage
 
 Une fois tous les prérequis respectés, et le projet cloné:
