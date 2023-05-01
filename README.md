@@ -27,7 +27,7 @@
 ## À propos du projet
 
 L'objectif du projet est de mettre en applicatioon nos différentes connaissances acquises au travers du cours de SIR.  
-Il s'agit de la mise en place d'une version reduite d'un gestionnaire de tickets. 
+Il s'agit de la mise en place d'une version reduite d'un gestionnaire de tickets.  Nous avons ici la partie frontend du projet.
 
 ## Technologies utilisées
 
@@ -58,7 +58,7 @@ npm install
 npm run dev
 ```
 
-Dans une autre console il faudrait lancer l'application le backend se trouvanc [ici](https://github.com/innomerve/tpjpa2023).
+Dans une autre console il faudrait lancer l'application le backend se trouvant [ici](https://github.com/innomerve/tpjpa2023).
 
 ### Principes de fonctionnement
 
