@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { Constants } from "@/stores/constants";
 import router from "@/router";
 import axios from "axios";
+import { TicketStore } from "./ticket";
 
 export const DiscussionStore = defineStore({
   id: "discussions",
@@ -23,14 +24,19 @@ export const DiscussionStore = defineStore({
           data
       ).then(() => {
 
-        this.success ="Comment created"
+        this.success ="Commentaire crée"
         this.errors = ""
-        this.getAll()
+        
       })
       .catch(function (error) {
         //this.errors =  result.data.errors
         console.log(error.message);
-      });      
+      });  
+      if(this.errors==""){
+        const ticketStore = TicketStore();
+        ticketStore.getById(data.ticketId);
+      }
+      
     },
 
     async getAll(){

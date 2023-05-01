@@ -4,12 +4,12 @@
   import { plainToClass } from "class-transformer";
 
   import RoundedTicket from "@/components/RoundedTicket.vue";
-    import { Tag } from "@/classes/Tag";
     import { Ticket } from "@/classes/Ticket";
-    import { User } from "@/classes/User";
-    import { Discussion } from "@/classes/Discussion";
     import { TicketStore } from "@/stores/ticket"
     import { DiscussionStore } from "@/stores/discussion"
+    import { UserStore } from "@/stores/user"
+
+    const userStore = UserStore();
 
   const ticketStore = TicketStore();
   const discussionStore = DiscussionStore();
@@ -19,7 +19,11 @@
     return route.params.id
   } )
 
+  userStore.getAll()
+    const users = computed(()=>userStore.getusers );
+
   const content = ref("");
+  const author = ref("");
 
   ticketStore.getById(parseInt(id.value))
 
@@ -35,17 +39,41 @@ const success = computed(() => {
 });
 
 
-  function createComment(){
-
+function validateFields() {
+  if(content.value === "" || author.value === "" || author.value === null){
+    return false;
   }
-  
+}
+
+
+async function store() {
+    ticketStore.errors=""
+    if(validateFields() === false){
+        discussionStore.errors = "Les champs message et auteur sont requis";
+    }    
+    else{
+        var data ={
+        "content":content.value,
+        "authorId":author.value,
+        "ticketId":id.value
+        }
+        console.log(data)
+        await discussionStore.store(data)  
+    }
+    if(errors.value == ""){
+        discussionStore.errors=""
+        content.value=""
+        author.value=""
+
+    }
+}
 </script>
 <template>
     <div class="px-20 py-10 ">
         <div class="flex flex-col space-y-5 border-b border-opacity-5 pb-5" >
             <div class="flex flex-row space-x-5 items-center">
                 <RoundedTicket :ticket="plainToClass(Ticket, ticket)" />
-                <h1 class="text-6xl text-gray-700 fjalla">{{ ticket.title }}</h1>
+                <h1 class="text-2xl font-bold text-gray-700 fjalla">{{ ticket.title }}</h1>
 
             </div>
 
@@ -83,8 +111,8 @@ const success = computed(() => {
         {{ ticket.content }}
         </p>
 
-        <section class="flex space-x-8 w-full">
-            <div class="flex flex-col space-y-5 py-4">
+        <section class="flex space-x-8 w-full pt-10">
+            <div class="flex flex-col space-y-5 py-4 w-full">
                 <h2 class="text-4xl fjalla text-gray-700">
                     <i class="fa-light fa-comment mr-4"></i>Discussions
                 </h2>
@@ -96,28 +124,42 @@ const success = computed(() => {
                     {{ success }}</span
                     >
                 </div>
-                <form action="" class="flex items-center space-x-5 w-full" @submit.prevent="createComment">
-                
-                    <input
-                    type="text"
-                    name="description"
-                    v-model="content"
-                    class="rounded-lg text-gray-700 border-gray-300"
-                    /><button type="submit">
+                <form class="flex items-end space-x-5 w-full" @submit.prevent="store">
+                    <div class=" w-3/5 mt-2 text-black flex flex-col">
+                        <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nouveau Message</span>
+                        <textarea v-model="content" rows="4" class="block py-2.5 px-1 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border-b-2 border-gray-200 focus:ring-0 focus:border-gray-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 peer" placeholder="message...">
+
+                        </textarea>
+                    </div>
+
+                    <div class="w-1/5 mt-2 text-black flex flex-col">
+                        <span class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Auteur</span>
+                        <select v-model="author" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-500 peer">
+                            <option selected>Choisissez l'auteur</option>
+
+                            <option v-for="user in users" :key="user.id" :value="user.id">{{user.name}}</option>
+                        </select>
+                    </div>
+                   
+                    <button type="submit" class="w-1/5" title="Envoyer">
                     <i class="fa-thin fa-paper-plane text-gray-700 text-3xl"></i>
                     </button>
                 </form>
-                <div class="flex flex-col space-y-3">
+                <div class="flex flex-col space-y-3 w-full pt-5">
                     <div 
                     v-for="comment in ticket.discussions" :key="comment.id"
-                    class="flex flex-col space-y-1 bg-gray-200 w-[50rem] rounded-lg p-2">
-                        <div class="inline-flex justify-between">
-                            <span class="text-sm text-gray-800" v-if="comment.author !== undefined">{{comment.author.name}}</span>
-                            <span class="text-sm text-gray-800" v-if="comment.createdAt !== undefined">{{comment.createdAt }} </span>
+                    class="flex flex-col space-y-1 bg-gray-200 w-[50rem] rounded-lg p-2 w-full">
+                        <div class="inline-flex justify-between text-orange-500">
+                            <div
+                                class="flex items-center space-x-3 rounded-full "
+                            >
+                                <i class="fa-light fa-user"></i><span v-if="comment.author !=undefined"> {{ comment.author.name}} </span>
+                            </div>
+                            <span class="text-sm " v-if="comment.createdAt !== undefined">{{"le "+comment.createdAt }} </span>
                         </div>
 
-                        <p class="text-sm text-gray-500">
-                            {{comment.content}}.
+                        <p class="text-sm text-gray-500 px-1">
+                            {{comment.content}}
                         </p>
                     </div>
                 </div>

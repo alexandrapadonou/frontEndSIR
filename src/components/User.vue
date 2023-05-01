@@ -7,7 +7,7 @@
 </script>
 <template>
     <div class="relative">
-        <i class="fa-regular fa-ellipsis-stroke  absolute top-0 right-0"></i>
+        <i v-show="false" class="fa-regular fa-ellipsis-stroke  absolute top-0 right-0"></i>
 
         <div class="flex flex-row m-5 items-center space-x-6  ">
             <RoundedUser />

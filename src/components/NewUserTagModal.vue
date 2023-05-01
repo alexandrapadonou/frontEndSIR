@@ -131,7 +131,7 @@ function toggleModal() {
                         type="submit"
                         aria-label="add user"
                         role="button"
-                        class="focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none px-6 py-3 bg-blue-700 hover:bg-opacity-80 shadow rounded-xl md:text-md text-sm text-white w-full font-bold"
+                        class="focus:ring-2 focus:ring-offset-2 focus:ring-orange-900 focus:outline-none px-6 py-3 bg-orange-800 hover:bg-opacity-80 shadow rounded-xl md:text-md text-sm text-white w-full font-bold"
                     >
                         Ajouter
                     </button>

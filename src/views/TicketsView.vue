@@ -27,7 +27,7 @@
 <template>
   <div class="px-20 py-10 ">
 
-    <div class="flex flex-row justify-between pb-10" >
+    <div class="flex flex-row justify-between pb-2" >
         <div class="text-lg md:text-xl font-bold text-dark-brown space-x-3">
           <span>{{tickets.length}} Tickets</span> 
           <span class="text-sm"><i class="fa-duotone fa-octagon"></i> 4 open </span>
@@ -41,8 +41,8 @@
         </RouterLink>
     </div>
 
-    <div class="flex flex-row justify-between items-baseline pt-10" >
-      <div class="flex flex-row w-8/12 items-center space-x-2">
+    <div class="flex flex-row justify-between items-end py-10" >
+      <div class="flex flex-row w-8/12 items-end space-x-2">
             <div class="w-1/3"><i class="fa-sharp fa-solid fa-sliders"></i> Filtrer par</div>
 
             <div class="flex flex-col justify-end justify-items-end w-2/3">
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div class="flex flex-row space-x-5 items-center">
+        <div class="flex flex-row space-x-5 items-end">
           <div><i class="fa-sharp fa-solid fa-sliders"></i> Trier par</div>
             <select v-model="sortBy.value" class="px-2 py-1 rounded-lg bg-gray-200 mx-2">
               <option class="px-2" value="title">title</option>
@@ -87,7 +87,7 @@
     </div>
     
 
-    <div class="flex flex-col px-2 pb-8 pt-5">
+    <div class="flex flex-col px-2 pb-8 pt-10">
         <div class="grid grid-cols-1 gap-y-5 gap-x-5 md:gap-x-10 w-full">
             <TicketVue v-for="ticket in tickets" :key="ticket.id" :ticket="plainToClass(Ticket, ticket)" class="w-full"/>
         </div>
